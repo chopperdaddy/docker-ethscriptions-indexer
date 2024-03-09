@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: postgres:14.11
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ethscriptions_indexer_development
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 4000 -b '0.0.0.0'"
+    volumes:
+      - .:/apps
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+      # DATABASE_REPLICA_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+volumes:
+  postgres_data:
