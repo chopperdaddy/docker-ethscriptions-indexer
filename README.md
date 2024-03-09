@@ -46,7 +46,3 @@ With the services running, your Ethscriptions Indexer is now accessible. The API
 ## Contributing
 
 Contributions to this Docker-based fork are welcome. Whether it's bug reports, feature suggestions, or code contributions, please feel free to get involved.
-
----
-
-Ensure you replace `<your-fork>` with the actual username and repository name where your fork is hosted. This README assumes you have a `.env.sample` file for users to copy from; if your sample environment file is named differently, adjust the instructions accordingly.
