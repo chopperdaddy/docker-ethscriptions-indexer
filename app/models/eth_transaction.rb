@@ -68,7 +68,7 @@ class EthTransaction < ApplicationRecord
   end
 
   def create_ethscription_from_input!
-    return unless utf8_input[0, 100].include?("image")
+    # return unless utf8_input[0, 100].include?("image")
 
     potentially_valid = Ethscription.new(
       {
@@ -93,7 +93,7 @@ class EthTransaction < ApplicationRecord
         content_uri_data = Eth::Abi.decode(['string'], creation_event['data']).first
         content_uri = HexDataProcessor.clean_utf8(content_uri_data)
 
-        next unless utf8_input[0, 100].include?("image")
+        # next unless utf8_input[0, 100].include?("image")
       rescue Eth::Abi::DecodingError
         next
       end
