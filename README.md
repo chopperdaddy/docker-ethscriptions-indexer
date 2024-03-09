@@ -15,8 +15,8 @@ Follow these steps to get your Ethscriptions Indexer running:
 First, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/chopperdaddy/facet-ethscriptions-indexer
-cd facet-ethscriptions-indexer
+git clone https://github.com/chopperdaddy/docker-ethscriptions-indexer
+cd docker-ethscriptions-indexer
 ```
 
 ### 2. Environment Configuration
