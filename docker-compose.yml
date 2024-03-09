@@ -8,6 +8,7 @@ services:
       POSTGRES_DB: ethscriptions_indexer_development
       POSTGRES_USER: your_username
       POSTGRES_PASSWORD: your_password
+
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 4000 -b '0.0.0.0'"
@@ -19,6 +20,16 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
-      # DATABASE_REPLICA_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+
+  clockwork:
+    build: .
+    command: bash -c "bundle exec clockwork config/main_importer_clock.rb"
+    volumes:
+      - .:/apps
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+
 volumes:
   postgres_data:
