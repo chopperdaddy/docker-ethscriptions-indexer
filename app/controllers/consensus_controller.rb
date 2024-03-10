@@ -13,7 +13,7 @@ class ConsensusController < ApplicationController
   end
 
   def index
-    ethscriptions_scope = Ethscription.select(:transaction_hash, :previous_owner, :current_owner, :sha, :creator)
+    ethscriptions_scope = Ethscription.select(:transaction_hash, :previous_owner, :current_owner, :creator)
     
     # Basic pagination
     ethscriptions, pagination_info = paginate(ethscriptions_scope)
