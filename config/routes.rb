@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       collection do
         get "/:id/data", to: "ethscriptions#data"
         get "/newer_ethscriptions", to: "ethscriptions#newer_ethscriptions"
+        get "/consensus", to: "consensus#index" # New consensus route
       end
     end
     

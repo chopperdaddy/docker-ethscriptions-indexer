@@ -43,6 +43,53 @@ This command builds the Docker images and starts the containers defined in `dock
 
 With the services running, your Ethscriptions Indexer is now accessible. The API can be reached at `http://localhost:4000/`.
 
+### 5. API Endpoints
+
+### Blocks
+
+- **List Blocks**: `GET /blocks`
+  - Retrieve a paginated list of blockchain blocks.
+- **Get Block Details**: `GET /blocks/:id`
+  - Fetch details for a specific block by its number.
+- **Get Newer Blocks**: `GET /blocks/newer_blocks`
+  - Retrieve blocks newer than a specified block number.
+
+### Ethscription Transfers
+
+- **List Transfers**: `GET /ethscription_transfers`
+  - Query transfers of ethscriptions based on filters like `from_address`, `to_address`, `transaction_hash`, `to_or_from`, `ethscription_token_tick`, and `ethscription_token_protocol`.
+
+### Ethscriptions
+
+- **List Ethscriptions**: `GET /ethscriptions`
+  - List ethscriptions with optional filters such as `current_owner`, `creator`, `previous_owner`, etc.
+- **Get Ethscription Details**: `GET /ethscriptions/:id`
+  - Fetch details of a specific ethscription by ID or transaction hash.
+- **Get Ethscription Data**: `GET /ethscriptions/data/:id`
+  - Access specific data for an ethscription.
+- **Get Newer Ethscriptions**: `GET /ethscriptions/newer_ethscriptions`
+  - Retrieve ethscriptions newer than a specific block number.
+
+### Status
+
+- **Get Indexer Status**: `GET /status/indexer_status`
+  - Provides the current status of the indexer, including the latest block number processed.
+
+### Tokens
+
+- **List Tokens**: `GET /tokens`
+  - Retrieve a list of tokens with optional filtering.
+- **Get Token Details**: `GET /tokens/:protocol/:tick`
+  - Fetch details for a specific token.
+- **Get Historical State**: `GET /tokens/:protocol/:tick/historical_state`
+  - Retrieve the historical state of a token as of a specified block.
+- **Validate Token Items**: `POST /tokens/:protocol/:tick/validate_token_items`
+  - Validate transaction hashes against token items of a specific token.
+
+## Filtering and Pagination
+
+Endpoints supporting list operations allow for filtering based on query parameters that match the resource attributes. Use pagination parameters (`page` and `limit`) to navigate through large datasets.
+
 ## Contributing
 
 Contributions to this Docker-based fork are welcome. Whether it's bug reports, feature suggestions, or code contributions, please feel free to get involved.
