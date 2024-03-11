@@ -20,6 +20,7 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+      RUN_MIGRATIONS: true
 
   clockwork:
     build: .
