@@ -1,6 +1,6 @@
 # Docker Implementation of Ethscriptions Indexer
 
-This project is a Docker-based implementation of the Ethscriptions Indexer, streamlined for easy setup and deployment. It's a fork and not the official open source Ethscriptions indexer but aims to replicate its functionality in a Docker environment. This setup includes everything needed to get up and running with minimal configuration.
+This project is a Docker-based implementation of the Ethscriptions Indexer, streamlined for easy setup and deployment. It's a fork of the official open source Ethscriptions indexer but aims to replicate its functionality in a Docker environment. This setup includes everything needed to get up and running with minimal configuration.
 
 ## Prerequisites
 
