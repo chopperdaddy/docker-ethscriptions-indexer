@@ -31,6 +31,12 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+      ETHEREUM_CLIENT_BASE_URL: ${ETHEREUM_CLIENT_BASE_URL}
+      ETHEREUM_CLIENT_API_KEY: ${ETHEREUM_CLIENT_API_KEY}
+      ETHEREUM_NETWORK: ${ETHEREUM_NETWORK}
+      ETHEREUM_CLIENT_CLASS: ${ETHEREUM_CLIENT_CLASS}
+      BLOCK_IMPORT_BATCH_SIZE: ${BLOCK_IMPORT_BATCH_SIZE}
+      TESTNET_START_BLOCK: ${TESTNET_START_BLOCK}
 
 volumes:
   postgres_data:

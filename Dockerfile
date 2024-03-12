@@ -4,6 +4,9 @@ FROM ruby:3.2.2
 # Install dependencies
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
+ENV RAILS_ENV=production
+ENV SECRET_KEY_BASE=your_generated_secret_key_base_here
+
 # Set the working directory inside the container
 WORKDIR /apps
 
