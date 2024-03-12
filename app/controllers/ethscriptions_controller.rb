@@ -37,8 +37,22 @@ class EthscriptionsController < ApplicationController
     if transaction_hash_only
       scope = scope.select(:id, :transaction_hash)
     end
+
+    consensus = params[:consensus].present?
+
+    if consensus
+      scope = scope.select(
+        :id,
+        :transaction_hash,
+        :block_number,
+        :creator,
+        :initial_owner,
+        :current_owner,
+        :previous_owner
+      )
+    end
     
-    results_limit = if transaction_hash_only
+    results_limit = if transaction_hash_only || consensus
       1000
     elsif include_latest_transfer
       50
