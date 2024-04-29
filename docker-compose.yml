@@ -5,9 +5,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: ethscriptions_indexer_development
-      POSTGRES_USER: your_username
-      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: ethscriptions_indexer_mainnet
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   web:
     build: .
@@ -18,8 +18,10 @@ services:
       - "4000:4000"
     depends_on:
       - db
+      - memcached
     environment:
-      DATABASE_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/ethscriptions_indexer_mainnet
+      # DATABASE_REPLICA_URL: 
       RUN_MIGRATIONS: true
 
   clockwork:
@@ -29,14 +31,21 @@ services:
       - .:/apps
     depends_on:
       - db
+      - memcached
     environment:
-      DATABASE_URL: postgres://your_username:your_password@db/ethscriptions_indexer_development
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/ethscriptions_indexer_mainnet
+      # DATABASE_REPLICA_URL: 
       ETHEREUM_CLIENT_BASE_URL: ${ETHEREUM_CLIENT_BASE_URL}
       ETHEREUM_CLIENT_API_KEY: ${ETHEREUM_CLIENT_API_KEY}
       ETHEREUM_NETWORK: ${ETHEREUM_NETWORK}
       ETHEREUM_CLIENT_CLASS: ${ETHEREUM_CLIENT_CLASS}
       BLOCK_IMPORT_BATCH_SIZE: ${BLOCK_IMPORT_BATCH_SIZE}
       TESTNET_START_BLOCK: ${TESTNET_START_BLOCK}
+
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
 
 volumes:
   postgres_data:
