@@ -1,3 +1,6 @@
+require 'httparty'
+require 'retryable'
+
 class UniversalClient
   attr_accessor :base_url, :api_key
 
@@ -13,7 +16,7 @@ class UniversalClient
     }
   end
 
-  def query_api(method:, params: [])
+  def query_api(method:, params: [], timeout: 5, retries: 3)
     data = {
       id: 1,
       jsonrpc: '2.0',
@@ -21,7 +24,10 @@ class UniversalClient
       params: params
     }
     url = [base_url, api_key].join('/')
-    HTTParty.post(url, body: data.to_json, headers: headers).parsed_response
+
+    Retryable.retryable(tries: retries, on: [Net::OpenTimeout, HTTParty::Error, Errno::ECONNREFUSED]) do
+      HTTParty.post(url, body: data.to_json, headers: headers, timeout: timeout).parsed_response
+    end
   end
 
   def get_block(block_number)
